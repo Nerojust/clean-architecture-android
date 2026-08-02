@@ -97,3 +97,9 @@ This template exists because "it worked in my demo" and "it worked in production
 ## License
 
 MIT — see [LICENSE](LICENSE). Fork it, rip out the GitHub API bit, put your own domain in `:domain`, and go build the thing you actually wanted to build.
+
+## Connect
+
+- [LinkedIn](https://www.linkedin.com/in/nyerhovwo-adjekughene-97508674/)
+- [Medium](https://medium.com/@nerojust4)
+- [GitHub](https://github.com/Nerojust) — follows appreciated
