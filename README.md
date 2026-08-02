@@ -61,6 +61,26 @@ sequenceDiagram
 - **Every feature owns its own MVI contract** — Intent, UiState, ViewModel, Screen, all living together in one module. No shared mega-ViewModel that everyone's afraid to touch.
 - **No Room, on purpose.** This isn't an offline-first app, it's an architecture demo — adding a local cache means writing a `LocalRepoDataSource` and combining it inside `GitHubRepoRepositoryImpl`. `:domain` and the feature modules wouldn't need to know it happened.
 
+## Real-world perspective
+
+I built this template from lessons learned building production fintech and payment mobile apps. In production environments handling real money, architectural decisions have immediate costs:
+
+- A loose module boundary = a week of debugging data integrity issues
+- Poor separation of concerns = compounds when handling sensitive transactions
+- Weak DI setup = credentials or keys accidentally leaked to the wrong layer
+- Weak testing = silent failures that affect millions
+
+This template exists because "it worked in my demo" and "it worked in production" are very different things. Every decision here is opinionated on purpose — the boundaries are enforced, not suggested.
+
+**Real-world patterns from building at scale:**
+- Clean Architecture isn't theoretical — it's how you survive scaling
+- MVI forces explicitness around state, which matters when state = money
+- Proper module separation prevents footguns before they happen
+
+**Learn more in my detailed guides:**
+- [Clean Architecture in Android: A Real-World Guide](https://medium.com/@nerojust4/clean-architecture-in-android-a-real-world-guide-2025-edition-e5b4e950674c)
+- [Mastering Dependency Injection with Hilt](https://medium.com/@nerojust4/mastering-dependency-injection-with-hilt-in-android-81b3d221da9a)
+
 ## Setup
 
 1. Clone it, open it in Android Studio (Ladybug or newer).
