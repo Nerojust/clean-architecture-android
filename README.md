@@ -100,6 +100,7 @@ MIT — see [LICENSE](LICENSE). Fork it, rip out the GitHub API bit, put your ow
 
 ## Connect
 
-- [LinkedIn](https://www.linkedin.com/in/nyerhovwo-adjekughene-97508674/)
+- [LinkedIn](https://www.linkedin.com/in/nerojust/)
 - [Medium](https://medium.com/@nerojust4)
+- [Dev.to](https://dev.to/nerojust/building-payment-flows-in-android-lessons-from-real-fintech-apps-5a09) — building payment flows in Android, lessons from real fintech apps
 - [GitHub](https://github.com/Nerojust) — follows appreciated
