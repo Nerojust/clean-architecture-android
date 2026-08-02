@@ -2,7 +2,7 @@
 
 A production-oriented Android template: Clean Architecture, MVI, Jetpack Compose, Hilt, and Coroutines, demonstrated with a GitHub repository browser.
 
-![CI](https://github.com/<your-username>/clean-architecture-android/actions/workflows/ci.yml/badge.svg)
+![CI](https://github.com/nerojust/clean-architecture-android/actions/workflows/ci.yml/badge.svg)
 
 ## Module graph
 
@@ -19,6 +19,7 @@ graph TD
     feature_repodetail --> core_ui
     data --> domain
     data --> core_network
+    data --> core_common[core:common]
 ```
 
 ## Data flow (MVI)
