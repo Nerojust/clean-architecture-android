@@ -1,0 +1,12 @@
+root = true
+
+[*.{kt,kts}]
+# Align ktlint's wrapping width with detekt's MaxLineLength (120, detekt's default) so
+# ktlintFormat doesn't collapse lines that detekt would then flag as too long.
+max_line_length = 120
+# The project's fixed package root is `com.nerojust.clean_architecture` (underscore is
+# intentional, non-negotiable). ktlint's package-name rule has no configurable pattern
+# and cannot be auto-corrected, so it must be disabled outright rather than worked around.
+ktlint_standard_package-name = disabled
+# Allow PascalCase names for Jetpack Compose @Composable functions (standard convention).
+ktlint_function_naming_ignore_when_annotated_with = Composable
