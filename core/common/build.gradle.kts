@@ -3,6 +3,8 @@ plugins {
 }
 
 dependencies {
-    implementation(libs.coroutines.core)
+    // api: DispatcherProvider's public signature exposes CoroutineDispatcher,
+    // so consumers need it on their compile classpath too.
+    api(libs.coroutines.core)
     testImplementation(libs.junit4)
 }

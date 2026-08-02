@@ -1,19 +1,28 @@
 package com.nerojust.clean_architecture.data
 
+import com.nerojust.clean_architecture.core.common.DispatcherProvider
 import com.nerojust.clean_architecture.core.network.GitHubApiService
 import com.nerojust.clean_architecture.core.network.dto.OwnerDto
 import com.nerojust.clean_architecture.core.network.dto.RepoDto
 import com.nerojust.clean_architecture.core.network.dto.RepoSearchResponseDto
 import io.mockk.coEvery
 import io.mockk.mockk
+import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.test.runTest
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertTrue
 import org.junit.Test
 
+private object TestDispatcherProvider : DispatcherProvider {
+    override val io: CoroutineDispatcher = Dispatchers.Unconfined
+    override val main: CoroutineDispatcher = Dispatchers.Unconfined
+    override val default: CoroutineDispatcher = Dispatchers.Unconfined
+}
+
 class GitHubRepoRepositoryImplTest {
     private val api = mockk<GitHubApiService>()
-    private val repository = GitHubRepoRepositoryImpl(api)
+    private val repository = GitHubRepoRepositoryImpl(api, TestDispatcherProvider)
 
     private val dto =
         RepoDto(

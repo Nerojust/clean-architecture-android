@@ -15,7 +15,7 @@ class RepoDetailContentTest {
     fun successStateShowsRepoDescription() {
         val repo = Repo(1, "octocat/hello", "A greeting repo", "https://x", 5, "Kotlin", "octocat", "https://a")
         composeRule.setContent {
-            RepoDetailContent(state = RepoDetailUiState.Success(repo))
+            RepoDetailContent(state = RepoDetailUiState.Success(repo), onRetry = {})
         }
         composeRule.onNodeWithText("A greeting repo").assertIsDisplayed()
     }
@@ -23,7 +23,7 @@ class RepoDetailContentTest {
     @Test
     fun errorStateShowsMessage() {
         composeRule.setContent {
-            RepoDetailContent(state = RepoDetailUiState.Error("Not found"))
+            RepoDetailContent(state = RepoDetailUiState.Error("Not found"), onRetry = {})
         }
         composeRule.onNodeWithText("Not found").assertIsDisplayed()
     }

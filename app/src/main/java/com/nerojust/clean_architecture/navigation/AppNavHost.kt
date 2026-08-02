@@ -1,6 +1,8 @@
 package com.nerojust.clean_architecture.navigation
 
+import androidx.compose.foundation.layout.safeDrawingPadding
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -13,7 +15,11 @@ private const val ROUTE_REPO_DETAIL = "repoDetail/{owner}/{name}"
 
 @Composable
 fun AppNavHost(navController: NavHostController = rememberNavController()) {
-    NavHost(navController = navController, startDestination = ROUTE_REPO_LIST) {
+    NavHost(
+        navController = navController,
+        startDestination = ROUTE_REPO_LIST,
+        modifier = Modifier.safeDrawingPadding(),
+    ) {
         composable(ROUTE_REPO_LIST) {
             RepoListScreen(onRepoClick = { owner, name ->
                 navController.navigate("repoDetail/$owner/$name")
