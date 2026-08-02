@@ -51,6 +51,7 @@ fun RepoListContent(
             label = { Text("Search GitHub repos") },
             keyboardOptions = KeyboardOptions(imeAction = ImeAction.Search),
             keyboardActions = KeyboardActions(onSearch = { onIntent(RepoListIntent.Search(query)) }),
+            singleLine = true,
             modifier = Modifier.fillMaxWidth().padding(bottom = 8.dp),
         )
 

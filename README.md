@@ -1,8 +1,23 @@
 # Clean Architecture Android
 
-A production-oriented Android template: Clean Architecture, MVI, Jetpack Compose, Hilt, and Coroutines, demonstrated with a GitHub repository browser.
+Another "Clean Architecture" repo, yes. There are a thousand of these. The difference is this one actually builds, actually has tests that check something, and the module boundaries aren't just a suggestion — `:domain` and `:data` are pure Kotlin, so there's no sneaking an `Activity` in there when nobody's looking.
+
+It's a GitHub repo browser: search a query, get real results from GitHub's API, tap one, see the details. Not exactly groundbreaking as an app, which is the point — the app is boring on purpose so the architecture gets to be the interesting part.
 
 ![CI](https://github.com/nerojust/clean-architecture-android/actions/workflows/ci.yml/badge.svg)
+
+## Screenshots
+
+<table>
+<tr>
+<td><img src="screenshots/repo-list.png" width="280" alt="Search results for 'kotlin'"/></td>
+<td><img src="screenshots/repo-detail.png" width="280" alt="Repo detail screen"/></td>
+</tr>
+<tr>
+<td align="center">Search — real results, not a fake list</td>
+<td align="center">Detail — avatar, stars, language</td>
+</tr>
+</table>
 
 ## Module graph
 
@@ -39,26 +54,26 @@ sequenceDiagram
     VM-->>UI: StateFlow<UiState>
 ```
 
-## Why this structure
+## Why it's built this way
 
-- `:domain` and `:data` are pure-Kotlin JVM modules — no Android dependency, so business logic is testable without an emulator and compiles faster.
-- Hilt wiring (`@Module`/`@InstallIn`) lives only in `:app`; `:domain`/`:data` classes use plain `@Inject constructor` (JSR-330), keeping them framework-agnostic.
-- Each feature module owns its own MVI contract (Intent/UiState/ViewModel/Screen) — no shared "god" ViewModel.
-- No local persistence (Room) by design — the goal is to demonstrate the domain/data boundary, not build an offline-capable app. Swapping in a local source of truth means adding a `LocalRepoDataSource` in `:data` and combining it in `GitHubRepoRepositoryImpl` — no change needed in `:domain` or the feature modules.
+- **`:domain` and `:data` are plain Kotlin JVM modules** — no Android import is even possible in there, so "the business logic doesn't know it's running on a phone" isn't a promise, it's a compiler error waiting to happen if someone tries.
+- **Hilt lives in `:app`, and only `:app`.** `:domain`/`:data` classes just take a constructor argument like it's 2015 (`@Inject`, no framework opinions). Nobody has to go hunting through five modules to find where the DI graph is actually assembled.
+- **Every feature owns its own MVI contract** — Intent, UiState, ViewModel, Screen, all living together in one module. No shared mega-ViewModel that everyone's afraid to touch.
+- **No Room, on purpose.** This isn't an offline-first app, it's an architecture demo — adding a local cache means writing a `LocalRepoDataSource` and combining it inside `GitHubRepoRepositoryImpl`. `:domain` and the feature modules wouldn't need to know it happened.
 
 ## Setup
 
-1. Clone the repo and open it in Android Studio (Ladybug or newer).
-2. Ensure Android SDK platform 35 and build-tools 35.0.0 are installed.
-3. Run `./gradlew :app:installDebug` with a device/emulator connected, or use the `app` run configuration in Android Studio.
+1. Clone it, open it in Android Studio (Ladybug or newer).
+2. Make sure you've got Android SDK platform 35 and build-tools 35.0.0 installed.
+3. `./gradlew :app:installDebug` with a device or emulator plugged in, or just hit run in Android Studio like a normal person.
 
 ## Testing
 
-- All unit tests: `./gradlew test`
-- Per module: `./gradlew :domain:test`, `./gradlew :data:test`, `./gradlew :feature:repolist:testDebugUnitTest`, `./gradlew :feature:repodetail:testDebugUnitTest`
-- Compose UI tests (require a connected device/emulator): `./gradlew :feature:repolist:connectedDebugAndroidTest :feature:repodetail:connectedDebugAndroidTest`
-- Lint: `./gradlew ktlintCheck detekt`
+- Everything: `./gradlew test`
+- One module at a time: `./gradlew :domain:test`, `./gradlew :data:test`, `./gradlew :feature:repolist:testDebugUnitTest`, `./gradlew :feature:repodetail:testDebugUnitTest`
+- Compose UI tests (need a device/emulator plugged in): `./gradlew :feature:repolist:connectedDebugAndroidTest :feature:repodetail:connectedDebugAndroidTest`
+- Lint, because CI will yell at you otherwise: `./gradlew ktlintCheck detekt`
 
 ## License
 
-MIT — see [LICENSE](LICENSE).
+MIT — see [LICENSE](LICENSE). Fork it, rip out the GitHub API bit, put your own domain in `:domain`, and go build the thing you actually wanted to build.
