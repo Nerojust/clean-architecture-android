@@ -94,6 +94,17 @@ This template exists because "it worked in my demo" and "it worked in production
 - Compose UI tests (need a device/emulator plugged in): `./gradlew :feature:repolist:connectedDebugAndroidTest :feature:repodetail:connectedDebugAndroidTest`
 - Lint, because CI will yell at you otherwise: `./gradlew ktlintCheck detekt`
 
+## Coming soon
+
+A few skills/patterns planned for future additions:
+
+- **A `LocalRepoDataSource`** — a worked example of adding offline caching without `:domain` or the feature modules needing to know it happened (the boundary this template is built around).
+- **Screenshot testing** (Paparazzi or Roborazzi) to round out the testing pyramid.
+- **An instrumented CI step**, once there's a reliable emulator setup that doesn't add flakiness to the pipeline.
+- **A second feature module** as a worked example of adding a new screen without touching `:domain` or `:data`.
+
+Got a pattern you'd like to see added? Open an issue — see [CONTRIBUTING.md](CONTRIBUTING.md).
+
 ## License
 
 MIT — see [LICENSE](LICENSE). Fork it, rip out the GitHub API bit, put your own domain in `:domain`, and go build the thing you actually wanted to build.
