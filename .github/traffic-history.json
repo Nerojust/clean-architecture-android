@@ -823,5 +823,27 @@
       "count": 7,
       "uniques": 5
     }
+  },
+  {
+    "date": "2026-11-08",
+    "views": {
+      "count": 0,
+      "uniques": 0
+    },
+    "clones": {
+      "count": 31,
+      "uniques": 15
+    }
+  },
+  {
+    "date": "2026-11-09",
+    "views": {
+      "count": 1,
+      "uniques": 1
+    },
+    "clones": {
+      "count": 20,
+      "uniques": 12
+    }
   }
 ]
